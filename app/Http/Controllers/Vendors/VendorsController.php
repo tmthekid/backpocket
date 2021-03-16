@@ -22,4 +22,25 @@ class VendorsController extends Controller
     public function show(Vendor $vendor){
         return view('admin.vendors.show', compact('vendor'));
     }
+
+    public function search(){
+        if(request()->search === '' || request()->search === null) return [];
+        return Vendor::where('name', 'LIKE', request()->search.'%')->get();
+    }
+
+    public function week(){
+        $first = Carbon::now()->startOfWeek();
+        $today = Carbon::now();
+        return Vendor::whereBetween('created_at', [$first, $today])->get();
+    }
+
+    public function month(){
+        $first = Carbon::now()->startOfMonth();
+        $today = Carbon::now();
+        return Vendor::whereBetween('created_at', [$first, $today])->get();
+    }
+
+    public function recentVendors(){
+        return Vendor::limit(request()->get('length'))->get();
+    }
 }

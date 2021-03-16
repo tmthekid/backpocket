@@ -22,6 +22,10 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Transactions', 'name' => 'adm
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Vendors', 'name' => 'admin'], function (){
     Route::get('vendors', 'VendorsController@index')->name('vendors.list');
+    Route::post('vendors/search', 'VendorsController@search');
+    Route::get('vendors/new-this-week', 'VendorsController@week')->name('vendors.week');
+    Route::get('vendors/new-this-month', 'VendorsController@month')->name('vendors.month');
+    Route::get('vendors/recent', 'VendorsController@recentVendors')->name('vendors.recent');
     Route::post('vendors-datatable', 'VendorsTableController')->name('vendors.datatable');
     Route::get('vendors/{vendor}', 'VendorsController@show')->name('vendors.detail');
 });
