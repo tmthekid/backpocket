@@ -59,6 +59,16 @@
                         <!-- START BREADCRUMB -->
                         <ol class="breadcrumb">
                             <!-- <li class="breadcrumb-item"><a href="#">Title</a></li> -->
+                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
+                            @if(request()->is('admin/vendors*'))
+                                <li class="breadcrumb-item active">Vendors</li>
+                            @endif
+                            @if(request()->is('admin/products*'))
+                                <li class="breadcrumb-item active">Products</li>
+                            @endif
+                            @if(request()->is('admin/transactions*'))
+                                <li class="breadcrumb-item active">Transactions</li>
+                            @endif
                         </ol>
                         <!-- END BREADCRUMB -->
                     </div>
