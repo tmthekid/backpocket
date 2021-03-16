@@ -44,6 +44,12 @@
     <div class="sidebar-menu">
         <!-- BEGIN SIDEBAR MENU ITEMS-->
         <ul class="menu-items">
+            <li class="m-t-30 ">
+                <a href="{{ route('admin.dashboard') }}" class="detailed">
+                    <span class="title">Dashboard</span>
+                </a>
+                <span class="{{ (request()->is('admin/dashboard')) ? 'bg-success' : '' }} icon-thumbnail"><i class="pg-home"></i></span>
+            </li>
             <li>
                 <a href="{{ route('vendors.list') }}" class="detailed">
                     <span class="titls">Vendors</span>
