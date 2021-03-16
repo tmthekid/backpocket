@@ -1,6 +1,11 @@
 @extends('admin.layouts.master')
 @section('title', 'Sales')
 @section('page-css')
+    <style>
+        .dataTables_filter {
+            display: none;
+        }
+    </style>
 @endsection
 @section('content')
     <div class=" container-fluid  container-fixed-lg">
@@ -10,7 +15,7 @@
                     <h5><strong>Sales</strong></h5>
                 </div>
             </div>
-            <div class="row px-5">
+            <div class="row px-4">
                 <div class="col-md-3">
                     <div class="form-group">
                         <label for="from" class="control-label">From</label>
@@ -45,7 +50,7 @@
                 </div>
             </div>
             <div class="card-body">
-                <table class="table table-hover table-condensed table-responsive" id="SalesDatatable">
+                <table class="table table-hover table-condensed table-responsive" id="salesDatatable">
                     <thead>
                     <tr>
                         <th>Transaction</th>
@@ -66,8 +71,8 @@
 @section('page-js')
     <script>
         $(document).ready(function (e) {
-            var table = $('#SalesDatatable');
-            var trans_datatable = table.DataTable({
+            var table = $('#salesDatatable');
+            var sales_datatable = table.DataTable({
                 "columnDefs": [
                     { "width": "20%", "targets": 0 },
                     { "width": "20%", "targets": 1 },
@@ -75,8 +80,6 @@
                     { "width": "20%", "targets": 3 },
                     { "width": "20%", "targets": 4 }
                 ],
-                "searching": false,
-                "processing": true,
                 "serverSide": true,
                 "sDom": '<"H"lfr>t<"F"ip>',
                 "method": "post",
@@ -101,19 +104,34 @@
                     {data: 'price'},
                     {data: 'quantity'},
                     {data: 'created_at'}
-                ]
+                ],
             });
             $('#from').change( function() {
-                trans_datatable.draw();
+                sales_datatable.draw();
             });
             $('#to').change( function() {
-                trans_datatable.draw();
+                sales_datatable.draw();
             });
             $('#date_options').change( function() {
-                trans_datatable.draw();
+                sales_datatable.draw();
             });
             $('#year_to_date').change( function() {
-                trans_datatable.draw();
+                sales_datatable.draw();
+            });
+            $('#salesDatatable thead tr').clone(true).appendTo('#salesDatatable thead');
+            $('#salesDatatable thead tr:eq(1) th').each( function (i) {
+                $(this).removeClass('sorting');
+                var title = $(this).text();
+                $(this).html('<input type="text" class="form-control" placeholder="Search '+title+'" />');
+                $('input', this).on('keyup change click', function(e) {
+                    e.stopPropagation();
+                    if (sales_datatable.column(i).search() !== this.value) {
+                        sales_datatable
+                            .column(i)
+                            .search(this.value)
+                            .draw();
+                    }
+                });
             });
         });
     </script>
