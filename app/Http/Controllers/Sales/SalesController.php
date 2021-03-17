@@ -15,4 +15,13 @@ class SalesController extends Controller
     {
         return view('admin.sales.list');
     }
+
+    public function topSales()
+    {
+        return Purchase::with(['product' => function($query){
+            $query->select('id', 'name');
+        }, 'transaction' => function($query){
+            $query->select('id', 'transaction_no');
+        }])->limit(request()->get('length'))->orderBy('price', 'desc')->get();
+    }
 }

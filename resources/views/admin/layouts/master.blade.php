@@ -69,6 +69,9 @@
                             @if(request()->is('admin/transactions*'))
                                 <li class="breadcrumb-item active">Transactions</li>
                             @endif
+                            @if(request()->is('admin/sales*'))
+                                <li class="breadcrumb-item active">Sales</li>
+                            @endif
                         </ol>
                         <!-- END BREADCRUMB -->
                     </div>

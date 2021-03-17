@@ -3,7 +3,11 @@
 @section('title', 'Transactions List')
 
 @section('page-css')
-
+    <style>
+        .dataTables_filter {
+            display: none;
+        }
+    </style>
 @endsection
 
 @section('content')
