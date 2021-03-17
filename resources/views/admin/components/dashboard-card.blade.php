@@ -1,8 +1,8 @@
-<div class="card" style="background: #6f42c1; color: #fff; height: 130px">
+<div class="card" style="background: #10cfbd; color: #fff; height: 130px; box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 6px -1px, rgba(0, 0, 0, 0.4) 0px 2px 4px -1px;">
     <div class="row">
         <div class="col-md-8">
             <div class="card-body">
-                <h5 class="card-title" style="color: #fff">New Vendors</h5>
+                <h3 class="card-title" style="color: #fff">New Vendors</h3>
                 <p class="card-text">This {{$title}}</p>
             </div>
         </div>

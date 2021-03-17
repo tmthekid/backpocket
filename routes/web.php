@@ -35,3 +35,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Products', 'name' => 'admin']
     Route::post('products-datatable', 'ProductsTableController')->name('products.datatable');
     Route::get('products/{product}', 'ProductsController@show')->name('products.detail');
 });
+
+Route::group(['prefix' => 'admin', 'namespace' => 'Sales', 'name' => 'admin'], function (){
+    Route::get('sales', 'SalesController@index')->name('sales.list');
+    Route::get('sales/top', 'SalesController@topSales')->name('sales.top');
+    Route::post('sales-datatable', 'SalesTableController')->name('sales.datatable');
+});

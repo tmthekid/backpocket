@@ -3,7 +3,11 @@
 @section('title', 'Transactions List')
 
 @section('page-css')
-
+    <style>
+        .dataTables_filter {
+            display: none;
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -14,7 +18,7 @@
         <div class="card card-default">
             <div class="card-header separator">
                 <div class="card-title">
-                    <h5><strong>Transactions list</strong></h5>
+                    <h5><strong>Transactions</strong></h5>
                 </div>
             </div>
             <div class="card-body p-t-20">
@@ -22,7 +26,6 @@
                     <div class="row justify-content-left">
                         <div class="col-md-3">
                             <div class="form-group" style="display: inline-block">
-
                                 <div class="row">
                                     <div class="col-md-5">
                                         <label>Order No</label>
@@ -87,11 +90,43 @@
                         {{--</div>--}}
                     </div>
                 </form>
-
-                <hr>
+                <div class="row mb-3">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="from" class="control-label">From</label>
+                            <input type="date" id="from" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="to" class="control-label">To</label>
+                            <input type="date" id="to" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="year_to_date" class="control-label">Year to date</label>
+                            <input type="date" id="year_to_date" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="date_options" class="control-label">Date Options</label>
+                            <select name="date_options" id="date_options" class="form-control">
+                                <option value="">Pick an option</option>
+                                <option value="yesterday">Yesterday</option>
+                                <option value="today">Today</option>
+                                <option value="this_weekdays">This Weekdays</option>
+                                <option value="this_whole_week">This Whole Week</option>
+                                <option value="this_month">This Month</option>
+                                <option value="this_year">This Year</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
                 <div class="">
                     <table class="table table-hover table-condensed table-responsive-block table-responsive"
-                           id="tableTransactions">
+                           id="transactionsTable">
                         <thead>
                         <tr>
                             <!-- NOTE * : Inline Style Width For Table Cell is Required as it may differ from user to user
@@ -126,25 +161,24 @@
 
     <script>
         $(document).ready(function (e) {
-
-            var table = $('#tableTransactions');
+            var table = $('#transactionsTable');
             var trans_datatable = table.DataTable({
-                "processing": true,
                 "serverSide": true,
-                "sDom": "<t><'row'<p i>>",
+                "sDom": '<"H"lfr>t<"F"ip>',
                 "destroy": true,
-                "scrollCollapse": true,
-                "oLanguage": {
-                    "sLengthMenu": "_MENU_ ",
-                    "sInfo": "Showing <b>_START_ to _END_</b> of _TOTAL_ entries"
-                },
-                "iDisplayLength": 5,
+                "pageLength": 10,
+                "sPaginationType": "full_numbers",
+                "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
                 "method": "post",
                 "ajax": {
                     "url": "{{ route('transactions.datatable') }}",
                     "type": "POST",
                     'data': function(data){
                         data.order_no = $('#filter_order_no').val();
+                        data.from = $('#from').val();
+                        data.to = $('#to').val();
+                        data.date_option = $('#date_options').val();
+                        data.year_to_date = $('#year_to_date').val();
                     }
                 },
                 "order": [[ 0, "asc" ]],
@@ -160,12 +194,37 @@
                     {data: 'actions', name: 'actions', orderable: false, searchable: false},
                 ]
             });
-
             $(document).on('keyup', '#filter_order_no', function () {
                 console.log($('#filter_order_no').val());
                trans_datatable.draw();
             });
-
+            $('#from').change( function() {
+                trans_datatable.draw();
+            });
+            $('#to').change( function() {
+                trans_datatable.draw();
+            });
+            $('#date_options').change( function() {
+                trans_datatable.draw();
+            });
+            $('#year_to_date').change( function() {
+                trans_datatable.draw();
+            });
+            $('#transactionsTable thead tr').clone(true).appendTo('#transactionsTable thead');
+            $('#transactionsTable thead tr:eq(1) th').each( function (i) {
+                $(this).removeClass('sorting');
+                var title = $(this).text();
+                $(this).html('<input type="text" class="form-control" placeholder="Search '+title+'" />');
+                $('input', this).on('keyup change click', function(e) {
+                    e.stopPropagation();
+                    if (trans_datatable.column(i).search() !== this.value) {
+                        trans_datatable
+                            .column(i)
+                            .search(this.value)
+                            .draw();
+                    }
+                });
+            });
             // var _format = function (d) {
             //     // `d` is the original data object for the row
             //     return '<table class="table table-inline">' +
