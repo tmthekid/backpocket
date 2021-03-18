@@ -1,20 +1,18 @@
 @extends('admin.layouts.master')
-
 @section('title', 'Vendors List')
-
 @section('page-css')
-
+    <style>
+        .dataTables_filter {
+            display: none;
+        }
+    </style>
 @endsection
-
 @section('content')
-
-    <!-- START CONTAINER FLUID -->
-    <div class=" container-fluid   container-fixed-lg">
-        <!-- START card -->
+    <div class="container-fluid container-fixed-lg">
         <div class="card card-default">
             <div class="card-header separator">
                 <div class="card-title">
-                    <h5><strong>Vendors list</strong></h5>
+                    <h5><strong>Vendors</strong></h5>
                 </div>
             </div>
             <div class="card-body p-t-20">
@@ -37,125 +35,122 @@
                 {{--</form>--}}
 
                 {{--<hr>--}}
-                <div class="">
-                    <table class="table table-hover table-condensed table-responsive-block table-responsive"
-                           id="tableVendors">
-                        <thead>
-                        <tr>
-                            <!-- NOTE * : Inline Style Width For Table Cell is Required as it may differ from user to user
-                            Comman Practice Followed
-                            -->
-                            <th style="width:10%;">ID</th>
-                            <th style="width: 10%;">Name</th>
-                            <th style="width: 10%;">Email</th>
-                            <th style="width:10%;">Address</th>
-                            <th style="width: 10%;">Store No.</th>
-                            <th style="width: 10%;">Tax No.</th>
-                            {{--<th style="width: 20%;">Actions</th>--}}
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-
-                        </tr>
-                        </tbody>
-                    </table>
+                <div class="row mb-3">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="from" class="control-label">From</label>
+                            <input type="date" id="from" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="to" class="control-label">To</label>
+                            <input type="date" id="to" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="year_to_date" class="control-label">Year to date</label>
+                            <input type="date" id="year_to_date" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="date_options" class="control-label">Date Options</label>
+                            <select name="date_options" id="date_options" class="form-control">
+                                <option value="">Pick an option</option>
+                                <option value="yesterday">Yesterday</option>
+                                <option value="today">Today</option>
+                                <option value="this_weekdays">This Weekdays</option>
+                                <option value="this_whole_week">This Whole Week</option>
+                                <option value="this_month">This Month</option>
+                                <option value="this_year">This Year</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
+                <table class="table table-hover table-condensed table-responsive-block table-responsive"
+                        id="vendorsTable">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Address</th>
+                        <th>Store No.</th>
+                        <th>Tax No.</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr></tr>
+                    </tbody>
+                </table>
             </div>
         </div>
-        <!-- END card -->
     </div>
-    <!-- END CONTAINER FLUID -->
 
 @endsection
 
 @section('page-js')
-
     <script>
         $(document).ready(function (e) {
-
-            var table = $('#tableVendors');
-            var trans_datatable = table.DataTable({
-                "processing": true,
+            var table = $('#vendorsTable');
+            var vendor_datatable = table.DataTable({
                 "serverSide": true,
-                "sDom": "<t><'row'<p i>>",
+                "sDom": '<"H"lfr>t<"F"ip>',
                 "destroy": true,
-                "scrollCollapse": true,
-                "oLanguage": {
-                    "sLengthMenu": "_MENU_ ",
-                    "sInfo": "Showing <b>_START_ to _END_</b> of _TOTAL_ entries"
-                },
-                "iDisplayLength": 5,
+                "pageLength": 10,
+                "sPaginationType": "full_numbers",
+                "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
                 "method": "post",
                 "ajax": {
                     "url": "{{ route('vendors.datatable') }}",
                     "type": "POST",
                     'data': function(data){
-                        // data.order_no = $('#filter_order_no').val();
+                        data.from = $('#from').val();
+                        data.to = $('#to').val();
+                        data.date_option = $('#date_options').val();
+                        data.year_to_date = $('#year_to_date').val();
                     }
                 },
                 "order": [[ 0, "asc" ]],
                 "columns": [
-                    // {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-                    {data: 'id', name: 'id'},
-                    {data: 'name', name: 'name'},
+                    { "data": "name", "name": "name",
+                        fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+                            $(nTd).html("<a style='color: #0090d9' href='/admin/vendors/"+oData.id+"'>"+oData.name+"</a>");
+                        }
+                    },
                     {data: 'email', name: 'email'},
                     {data: 'address', name: 'address'},
                     {data: 'store_no', name: 'store_no'},
-                    {data: 'tax_no', name: 'tax_no'},
-                    // {data: 'actions', name: 'actions', orderable: false, searchable: false},
+                    {data: 'tax_no', name: 'tax_no'}
                 ]
             });
-
-            $(document).on('keyup', '#filter_order_no', function () {
-                console.log($('#filter_order_no').val());
-               trans_datatable.draw();
+            $('#from').change( function() {
+                vendor_datatable.draw();
             });
-
-            // var _format = function (d) {
-            //     // `d` is the original data object for the row
-            //     return '<table class="table table-inline">' +
-            //         '<tr>' +
-            //         '<td>Learn from real test data <span class="label label-important">ALERT!</span></td>' +
-            //         '<td>USD 1000</td>' +
-            //         '</tr>' +
-            //         '<tr>' +
-            //         '<td>PSDs included</td>' +
-            //         '<td>USD 3000</td>' +
-            //         '</tr>' +
-            //         '<tr>' +
-            //         '<td>Extra info</td>' +
-            //         '<td>USD 2400</td>' +
-            //         '</tr>' +
-            //         '</table>';
-            // }
-
-            // // Add event listener for opening and closing details
-            // $('#tableVendors tbody').on('click', 'tr', function () {
-            //     //var row = $(this).parent()
-            //     if ($(this).hasClass('shown') && $(this).next().hasClass('row-details')) {
-            //         $(this).removeClass('shown');
-            //         $(this).next().remove();
-            //         return;
-            //     }
-            //     var tr = $(this).closest('tr');
-            //     var row = table.DataTable().row(tr);
-
-            //     $(this).parents('tbody').find('.shown').removeClass('shown');
-            //     $(this).parents('tbody').find('.row-details').remove();
-
-            //     row.child(_format(row.data())).show();
-            //     tr.addClass('shown');
-            //     tr.next().addClass('row-details');
-            // });
-
-            //Date Pickers
-            $('#daterangepicker').daterangepicker({
-                timePicker: true,
-                timePickerIncrement: 30,
-                format: 'MM/DD/YYYY h:mm A'
-            }, function (start, end, label) {
-                console.log(start.toISOString(), end.toISOString(), label);
+            $('#to').change( function() {
+                vendor_datatable.draw();
+            });
+            $('#date_options').change( function() {
+                vendor_datatable.draw();
+            });
+            $('#year_to_date').change( function() {
+                vendor_datatable.draw();
+            });
+            $('#vendorsTable thead tr').clone(true).appendTo('#vendorsTable thead');
+            $('#vendorsTable thead tr:eq(1) th').each( function (i) {
+                $(this).removeClass('sorting');
+                var title = $(this).text();
+                $(this).html('<input type="text" class="form-control" placeholder="Search '+title+'" />');
+                $('input', this).on('keyup change click', function(e) {
+                    e.stopPropagation();
+                    if (vendor_datatable.column(i).search() !== this.value) {
+                        vendor_datatable
+                            .column(i)
+                            .search(this.value)
+                            .draw();
+                    }
+                });
             });
         });
     </script>

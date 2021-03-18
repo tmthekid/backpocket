@@ -56,8 +56,11 @@
                     dataSrc: ""
                 },
                 "columns": [
-                        {data: 'id'},
-                        {data: 'name'},
+                        { "data": "name", "name": "name",
+                            fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+                                $(nTd).html("<a style='color: #0090d9' href='/admin/vendors/"+oData.id+"'>"+oData.name+"</a>");
+                            }
+                        },
                         {data: 'email'},
                         {data: 'address'},
                         {data: 'store_no'},

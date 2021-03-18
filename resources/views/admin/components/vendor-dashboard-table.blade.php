@@ -8,7 +8,6 @@
         <table class="table table-hover table-condensed table-responsive-block table-responsive" id="vendorsTable" style="max-height: 22rem">
             <thead>
                 <tr>
-                    <th>ID</th>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Address</th>

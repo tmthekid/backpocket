@@ -13,7 +13,7 @@
 @section('content')
 
     <!-- START CONTAINER FLUID -->
-    <div class=" container-fluid   container-fixed-lg">
+    <div class="container-fluid container-fixed-lg">
         <!-- START card -->
         <div class="card card-default">
             <div class="card-header separator">
@@ -124,31 +124,23 @@
                         </div>
                     </div>
                 </div>
-                <div class="">
-                    <table class="table table-hover table-condensed table-responsive-block table-responsive"
-                           id="transactionsTable">
-                        <thead>
-                        <tr>
-                            <!-- NOTE * : Inline Style Width For Table Cell is Required as it may differ from user to user
-                            Comman Practice Followed
-                            -->
-                            <th style="width:10%;">ID</th>
-                            <th style="width: 12%;">Transaction Date</th>
-                            <th style="width: 12%;">Transaction Time</th>
-                            <th style="width: 10%;">Order no</th>
-                            <th style="width: 13%;">Vendor</th>
-                            <th style="width: 13%;">Vendor Email</th>
-                            <th style="width: 10%;">Amount</th>
-                            <th style="width: 20%;">Actions</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
+                <table class="table table-hover table-condensed table-responsive-block table-responsive" id="transactionsTable">
+                    <thead>
+                    <tr>
+                        <th style="width:10%;">ID</th>
+                        <th style="width: 12%;">Transaction Date</th>
+                        <th style="width: 12%;">Transaction Time</th>
+                        <th style="width: 10%;">Order no</th>
+                        <th style="width: 13%;">Vendor</th>
+                        <th style="width: 13%;">Vendor Email</th>
+                        <th style="width: 10%;">Amount</th>
+                        <th style="width: 20%;">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr></tr>
+                    </tbody>
+                </table>
             </div>
         </div>
         <!-- END card -->
