@@ -37,3 +37,7 @@ a:active {
     background: #888;
     color: #fff;
 }
+
+.card-title h5 strong {
+    color: #626262 !important;
+}
