@@ -8,7 +8,7 @@
     </style>
 @endsection
 @section('content')
-    <div class=" container-fluid  container-fixed-lg">
+    <div class="container-fluid container-fixed-lg">
         <div class="card card-default">
             <div class="card-header">
                 <div class="card-title">

@@ -25,8 +25,8 @@
                 <div class="card" style="background: #10cfbd; height: 130px; box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 6px -1px, rgba(0, 0, 0, 0.4) 0px 2px 4px -1px;">
                     <div class="card-body">
                         <h3 class="card-title" style="color: #fff">Reports</h3>
-                        <a style="color: #fff; font-size: 1.2rem; margin-right: 1.2rem;" href="{{route('sales.list')}}"><i class="fa fa-money mr-2" aria-hidden="true"></i>Sales</a>
-                        <a style="color: #fff; font-size: 1.2rem" href="{{route('transactions.list')}}"><i class="fa fa-paper-plane mr-2" aria-hidden="true"></i>Transactions</a>
+                        <a style="color: #fff; font-size: 1.05rem; margin-right: 1.1rem;" href="{{route('sales.list')}}"><i class="fa fa-money mr-2" aria-hidden="true"></i>Sales</a>
+                        <a style="color: #fff; font-size: 1.05rem;" href="{{route('transactions.list')}}"><i class="fa fa-paper-plane mr-2" aria-hidden="true"></i>Transactions</a>
                     </div>
                 </div>
             </div>

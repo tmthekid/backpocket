@@ -78,6 +78,7 @@
                         <th>Address</th>
                         <th>Store No.</th>
                         <th>Tax No.</th>
+                        <th>Date</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -120,9 +121,10 @@
                         }
                     },
                     {data: 'email', name: 'email'},
-                    {data: 'address', name: 'address'},
+                    {data: 'short_address', name: 'short_address'},
                     {data: 'store_no', name: 'store_no'},
-                    {data: 'tax_no', name: 'tax_no'}
+                    {data: 'tax_no', name: 'tax_no'},
+                    {data: 'created_at', name: 'created_at'}
                 ]
             });
             $('#from').change( function() {

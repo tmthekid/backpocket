@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Purchase extends Model
 {
-    protected $casts = ['created_at' => 'date:Y-m-d'];
+    protected $casts = ['created_at' => 'date:m-d-Y'];
 
     public function product(){
     	return $this->belongsTo(Product::class);
