@@ -8,7 +8,7 @@
         <div class="brand inline   ">
             <!-- <img src="assets/img/logo.png" alt="logo" data-src="assets/img/logo.png"
     data-src-retina="assets/img/logo_2x.png" width="78" height="22"> -->
-            <strong>LOGO</strong>
+            <strong><img width="40%" style="margin-left: 4rem" src="/admin/logo.png" alt="Logo"></strong>
         </div>
 
     </div>

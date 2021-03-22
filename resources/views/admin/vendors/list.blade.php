@@ -95,6 +95,7 @@
     <script>
         $(document).ready(function (e) {
             var table = $('#vendorsTable');
+            $.fn.dataTable.ext.errMode = 'none';
             var vendor_datatable = table.DataTable({
                 "serverSide": true,
                 "sDom": '<"H"lfr>t<"F"ip>',
@@ -102,10 +103,9 @@
                 "pageLength": 10,
                 "sPaginationType": "full_numbers",
                 "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
-                "method": "post",
                 "ajax": {
                     "url": "{{ route('vendors.datatable') }}",
-                    "type": "POST",
+                    "method": "POST",
                     'data': function(data){
                         data.from = $('#from').val();
                         data.to = $('#to').val();

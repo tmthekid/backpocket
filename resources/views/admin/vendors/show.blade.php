@@ -17,7 +17,8 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="card card-default" style="min-height: 18rem">
-                        <div class="card-body">
+                        <div class="card-body text-center">
+                            <img src="https://via.placeholder.com/450x120.png?text=Vendor+Logo" style="width: 100%" alt="logo">
                             <h4>{{ $vendor->address }}</h4>
                             <p><a href="mailto:{{ $vendor->email }}">{{ $vendor->email }}</a></p>
                             @if($vendor->store_no)
@@ -26,11 +27,39 @@
                             @if($vendor->tax_no)
                                 <p>{{ $vendor->tax_no }}</p>
                             @endif
+                            <button class="btn" style="margin-top: 1rem; background: #6d5cae; text-transform: uppercase; color: #fff; width: 100%">Add to Favourites</button>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-8">
                     <div id="map" style="min-height: 18rem"></div>
+                </div>  
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card card-default" style="text-align: center; min-height: 350px">
+                        <h5 class="card-title" style="font-weight: bold; text-transform: uppercase">Quick Report</h5>
+                        <hr style="margin: 0 25px;" />
+                        <div class="card-body text-center">
+                            <div style="display: flex; justify-content: center">
+                                <select name="date" id="date" class="form-control" style="width: 30%">
+                                    <option value="today">Today</option>
+                                    <option value="this_week">This Week</option>
+                                </select>
+                            </div>
+                            <hr />
+                            <div style="width: 100%; display: flex; justify-content: center">
+                                <div style="width: 50%;">
+                                    <div><strong style="text-transform: uppercase">Total Spent:</strong>&nbsp;&nbsp;&nbsp;&nbsp;$250.00</div>
+                                    <hr />
+                                    <div><strong style="text-transform: uppercase">Transactions:</strong>&nbsp;&nbsp;&nbsp;&nbsp;11</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <img src="https://via.placeholder.com/750x250.png?text=Ad+Image" style="width: 100%" alt="Image">
                 </div>  
             </div>
         </div>

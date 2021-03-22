@@ -4,10 +4,10 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-xl-3 col-lg-6 col-sm-12">
-                @include('admin.components.dashboard-card', ['id' => 'week', 'title' => "Week"])
+                @include('admin.components.dashboard-card', ['background' => '#10cfbd', 'id' => 'week', 'title' => "Week"])
             </div>
             <div class="col-xl-3 col-lg-6 col-sm-12">
-                @include('admin.components.dashboard-card', ['id' => 'month', 'title' => "Month"])
+                @include('admin.components.dashboard-card', ['background' => '#10cfbd','id' => 'month', 'title' => "Month"])
             </div>
             <div class="col-xl-3 col-lg-6 col-sm-12">
                 <div class="card" style="background: #10cfbd; height: 130px; box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 6px -1px, rgba(0, 0, 0, 0.4) 0px 2px 4px -1px;">
@@ -45,6 +45,7 @@
     <script>
         $(document).ready(function (e) {
             var table = $('#vendorsTable');
+            $.fn.dataTable.ext.errMode = 'none';
             table.DataTable({
                 "searching": false,
                 "lengthMenu": [ 5, 10, 25, 50, 75, 100 ],
@@ -70,6 +71,7 @@
         });
         $(document).ready(function (e) {
             var table = $('#salesTable');
+            $.fn.dataTable.ext.errMode = 'none';
             table.DataTable({
                 "searching": false,
                 "info": false,

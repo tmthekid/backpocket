@@ -77,8 +77,8 @@
 
     <script>
         $(document).ready(function (e) {
-
             var table = $('#tableProducts');
+            $.fn.dataTable.ext.errMode = 'none';
             var trans_datatable = table.DataTable({
                 "processing": true,
                 "serverSide": true,

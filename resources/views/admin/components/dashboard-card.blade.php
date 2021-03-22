@@ -1,4 +1,4 @@
-<div class="card" style="background: #10cfbd; color: #fff; height: 130px; box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 6px -1px, rgba(0, 0, 0, 0.4) 0px 2px 4px -1px;">
+<div class="card" style="background: {{$background}}; color: #fff; height: 130px; box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 6px -1px, rgba(0, 0, 0, 0.4) 0px 2px 4px -1px;">
     <div class="row">
         <div class="col-md-8">
             <div class="card-body">

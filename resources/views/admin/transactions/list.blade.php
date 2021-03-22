@@ -131,6 +131,10 @@
                         <th style="width: 12%;">Transaction Date</th>
                         <th style="width: 12%;">Transaction Time</th>
                         <th style="width: 10%;">Order no</th>
+                        <th style="width: 13%;">Bar QR Code</th>
+                        <th style="width: 13%;">Register No</th>
+                        <th style="width: 13%;">Float No</th>
+                        <th style="width: 13%;">Operator Id</th>
                         <th style="width: 13%;">Vendor</th>
                         <th style="width: 13%;">Vendor Email</th>
                         <th style="width: 10%;">Amount</th>
@@ -154,6 +158,7 @@
     <script>
         $(document).ready(function (e) {
             var table = $('#transactionsTable');
+            $.fn.dataTable.ext.errMode = 'none';
             var trans_datatable = table.DataTable({
                 "serverSide": true,
                 "sDom": '<"H"lfr>t<"F"ip>',
@@ -161,10 +166,9 @@
                 "pageLength": 10,
                 "sPaginationType": "full_numbers",
                 "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
-                "method": "post",
                 "ajax": {
                     "url": "{{ route('transactions.datatable') }}",
-                    "type": "POST",
+                    "method": "POST",
                     'data': function(data){
                         data.order_no = $('#filter_order_no').val();
                         data.from = $('#from').val();
@@ -180,6 +184,10 @@
                     {data: 'transaction_date', name: 'transaction_date'},
                     {data: 'transaction_time', name: 'transaction_time'},
                     {data: 'order_no', name: 'order_no'},
+                    {data: '', name: ''},
+                    {data: '', name: ''},
+                    {data: '', name: ''},
+                    {data: '', name: ''},
                     {data: 'vendor_name', name: 'vendor_name'},
                     {data: 'vendor_email', name: 'vendor_email'},
                     {data: 'total', name: 'total'},

@@ -72,6 +72,7 @@
     <script>
         $(document).ready(function (e) {
             var table = $('#salesDatatable');
+            $.fn.dataTable.ext.errMode = 'none';
             var sales_datatable = table.DataTable({
                 "columnDefs": [
                     { "width": "20%", "targets": 0 },

@@ -19,5 +19,6 @@
                 <tr></tr>
             </tbody>
         </table>
+        <a href="{{route('sales.list')}}" style="color: #0090d9">Go to Sales</a>
     </div>
 </div>
