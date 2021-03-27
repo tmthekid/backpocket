@@ -99,80 +99,31 @@
                                                             </td>
                                                         </tr>
                                                         @endif
-                                                        <!-- <tr>
-                                                            <td class="v-align-middle text-center"
-                                                                style="padding: 1px!important; border-bottom: none;">
-                                                                <div class="b-grey p-t-10 p-b-40 p-l-5 p-r-5">
-                                                                    <h5 class="m-b-30 font-weight-bold">PAYMENT INFORMATION</h5>
-                                                                    <div class="d-flex justify-content-between px-4" style="max-width: 32rem; overflow-x: auto">
-                                                                        <div style="width: 50%">
-                                                                            <h5><strong>Payment Details</strong></h5>
-                                                                            <ul class="list-group">
-                                                                                <li class="list-group-item text-left">Method: {{ $transaction->payment_method }}</li>
-                                                                                <li class="list-group-item text-left">Auth Code: -</li>
-                                                                                <li class="list-group-item text-left">Payment Reference: {{ $transaction->payment_ref }}</li>
-                                                                            </ul>
-                                                                        </div>
-                                                                        <div style="flex: 1; padding: 0 1rem;">
-                                                                            <h5 class="text-center"><strong>General Notes</strong></h5>
-                                                                            <p class="text-left">-</p>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                            </td>
-                                                            <td class="v-align-middle text-center" colspan="2"
-                                                                style="border-bottom: none;">
-                                                                <div class="text-right justify-content-center align-items-end m-b-20 m-t-10">
-                                                                    <strong>SUBTOTAL:</strong> {{ $transaction->sub_total }}<br>
-                                                                    @if($extra_info && $extra_info->where('type', 'amount')->count())
-                                                                        @foreach($extra_info as $info)
-                                                                            @if($info['type'] == 'amount')
-                                                                                <strong>{{ $info['label'] }}:</strong>
-                                                                                {{ $info['value'] }} <br>
-                                                                            @endif
-                                                                        @endforeach
-                                                                    @endif
-                                                                    @if($transaction->vendor->name != 'Apple')
-                                                                        <strong>TAXES:</strong>
-                                                                        {{ $transaction->tax_amount }}
-                                                                    @endif
-                                                                </div>
-
-                                                                <div
-                                                                    class="text-right bg-master-darker col-sm-height padding-10 d-flex flex-column justify-content-center align-items-end">
-                                                                    <h5
-                                                                        class="font-montserrat all-caps small no-margin hint-text text-white bold">
-                                                                        Total</h5>
-                                                                    <h1 class="no-margin text-white">{{ $transaction->total }}</h1>
-                                                                </div>
-                                                            </td>
-                                                        </tr> -->
                                                     </tbody>
                                                 </table>
                                                 <div class="d-flex align-items-center flex-column flex-xl-row">
-                                                    <div class="col-lg-8">
-                                                        <div class="v-align-middle text-center" style="padding: 1px!important; border-bottom: none;">
-                                                            <div class="b-grey p-t-10 p-b-40 p-l-5 p-r-5">
+                                                    <div class="col-lg-8 col-md-12">
+                                                        <div style="padding: 1px!important; border-bottom: none;">
+                                                            <div class="b-grey">
                                                                 <h5 class="m-b-30 font-weight-bold">PAYMENT INFORMATION</h5>
-                                                                <div class="d-flex justify-content-between px-4">
-                                                                    <div>
-                                                                        <h5><strong>Payment Details</strong></h5>
-                                                                        <ul class="list-group">
-                                                                            <li class="list-group-item text-left">Method: {{ $transaction->payment_method }}</li>
-                                                                            <li class="list-group-item text-left">Auth Code: -</li>
-                                                                            <li class="list-group-item text-left">Payment Reference: {{ $transaction->payment_ref }}</li>
-                                                                        </ul>
-                                                                    </div>
-                                                                    <div style="flex: 1; padding: 0 1rem;">
-                                                                        <h5 class="text-center"><strong>General Notes</strong></h5>
-                                                                        <p class="text-left">-</p>
-                                                                    </div>
+                                                                <div class="px-4">
+                                                                    <h5 class="text-left"><strong>Payment Details</strong></h5>
+                                                                    <ul class="list-group">
+                                                                        <li class="list-group-item text-left">Method: {{ $transaction->payment_method }}</li>
+                                                                        <li class="list-group-item text-left">Auth Code: -</li>
+                                                                        <li class="list-group-item text-left">Payment Reference: {{ $transaction->payment_ref }}</li>
+                                                                    </ul>
+                                                                </div>
+                                                                <div class="px-4">
+                                                                    <h5 class="text-left"><strong>General Notes</strong></h5>
+                                                                    <ul class="list-group">
+                                                                        <li class="list-group-item text-left">-</li>
+                                                                    </ul>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-lg-4">
+                                                    <div class="col-lg-4 col-md-12">
                                                         <div style="border-bottom: none;">
                                                             <div class="text-right justify-content-center align-items-end">
                                                                 <strong>SUBTOTAL:</strong> {{ $transaction->sub_total }}<br>
@@ -204,7 +155,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-5">
+                                <div class="col-lg-5 col-md-12">
                                     <div class="card card-default">
                                         <div class="card-header separator">
                                             <div class="card-title">
