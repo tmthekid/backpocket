@@ -24,7 +24,7 @@
             <div class="card-body p-t-20">
                 <form action="">
                     <div class="row justify-content-left">
-                        <div class="col-md-3">
+                        <div class="col-lg-3 col-md-12">
                             <div class="form-group" style="display: inline-block">
                                 <div class="row">
                                     <div class="col-md-5">
@@ -32,6 +32,18 @@
                                     </div>
                                     <div class="col-md-7">
                                         <input type="text" class="form-control" id="filter_order_no">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-12">
+                            <div class="form-group" style="display: inline-block">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <label>Vendor</label>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <input type="text" class="form-control" id="filter_vendor">
                                     </div>
                                 </div>
                             </div>
@@ -171,6 +183,7 @@
                     "method": "POST",
                     'data': function(data){
                         data.order_no = $('#filter_order_no').val();
+                        data.vendor_name = $('#filter_vendor').val();
                         data.from = $('#from').val();
                         data.to = $('#to').val();
                         data.date_option = $('#date_options').val();
@@ -183,7 +196,9 @@
                     {data: 'id', name: 'id'},
                     {data: 'transaction_date', name: 'transaction_date'},
                     {data: 'transaction_time', name: 'transaction_time'},
-                    {data: 'order_no', name: 'order_no'},
+                    {data: 'order_no', name: 'order_no', fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+                        $(nTd).html("<a style='color: #0090d9' href='/admin/transactions/"+oData.id+"'>"+oData.order_no+"</a>");
+                    }},
                     {data: '', name: ''},
                     {data: '', name: ''},
                     {data: '', name: ''},
@@ -195,8 +210,10 @@
                 ]
             });
             $(document).on('keyup', '#filter_order_no', function () {
-                console.log($('#filter_order_no').val());
                trans_datatable.draw();
+            });
+            $('#filter_vendor').keyup( function() {
+                trans_datatable.draw();
             });
             $('#from').change( function() {
                 trans_datatable.draw();

@@ -59,6 +59,12 @@ class TransactionsTableController extends Controller
         if(request()->to) {
             $transactions = $transactions->whereDate('transaction_date', '<=', Carbon::createFromDate(request()->to));
         }
+        if($request->vendor_name) {
+            $name = $request->vendor_name;
+            $transactions = $transactions->whereHas('vendor', function($query) use ($name){
+                $query->where('name', 'like', "%{$name}%");
+            });
+        }
         if($request->order_no!=''){
             $transactions = $transactions->where('order_no', 'like', "%{$request->order_no}%")->get();
         } else{

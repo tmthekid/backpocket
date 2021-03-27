@@ -19,7 +19,10 @@
                     <div class="card card-default" style="min-height: 18rem">
                         <div class="card-body text-center">
                             <img src="https://via.placeholder.com/450x120.png?text=Vendor+Logo" style="width: 100%" alt="logo">
-                            <h4>{{ $vendor->address }}</h4>
+                            <h4>{{ $vendor->street_name }}</h4>
+                            <h4>{{ $vendor->city }}</h4>
+                            <h4>{{ $vendor->state }}</h4>
+                            <h4>{{ $vendor->zip_code }}</h4>
                             <p><a href="mailto:{{ $vendor->email }}">{{ $vendor->email }}</a></p>
                             @if($vendor->store_no)
                                 <p>{{ $vendor->store_no }}</p>

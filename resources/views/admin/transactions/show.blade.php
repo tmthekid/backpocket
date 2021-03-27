@@ -13,43 +13,43 @@
                     <!-- START card -->
                     <div class="card card-default">
                         <div class="card-header separator">
-                            <div class="card-title">
-                                <h5><strong>Transaction Details</strong></h5>
-
+                            <div class="d-flex justify-content-between flex-column flex-md-row">
+                                <div class="card-title">
+                                    <h5><strong style="#626262 !important">Transaction Details</strong></h5>
+                                </div>
+                                <div>
+                                    <h5 style="#626262 !important">Transaction Number: {{ $transaction->transaction_no }}</h5>
+                                    @if($transaction->payment_ref)<h5 style="#626262 !important">Payment Ref: {{ $transaction->payment_ref }}</h5>@endif
+                                </div>
                             </div>
                         </div>
                         <div class="card-body p-t-20">
                             <!-- <div class="container-fluid"> -->
                             <div class="row">
-                                <div class="col-md-7">
+                                <div class="col-lg-7">
                                     <div class="card card-default">
-                                        <div class="invoice padding-50 sm-padding-10">
-                                            <div>
-                                                <div class="row">
-                                                    <div class="col-md-4">
-                                                        {{--<img width="235" height="47" alt="" class="invoice-logo"--}}
-                                                        <img height="60" alt="" class="invoice-logo"
-                                                            data-src-retina="{{ asset('admin/assets/img/vendor-logos/'. $transaction->vendor->logo .'.png') }}"
-                                                            data-src="{{ asset('admin/assets/img/vendor-logos/'. $transaction->vendor->logo .'.png') }}"
-                                                            src="{{ asset('admin/assets/img/vendor-logos/'. $transaction->vendor->logo .'.png') }}">
+                                        <div class="invoice padding-50">
+                                            <div class="d-flex align-items-center justify-content-between flex-column flex-xl-row">
+                                                <div>
+                                                    <img style="width: 45%; position: relative; left: 50%; transform: translateX(-50%)"  alt="Logo"
+                                                        data-src-retina="{{ asset('admin/assets/img/vendor-logos/'. $transaction->vendor->logo .'.png') }}"
+                                                        data-src="{{ asset('admin/assets/img/vendor-logos/'. $transaction->vendor->logo .'.png') }}"
+                                                        src="{{ asset('admin/assets/img/vendor-logos/'. $transaction->vendor->logo .'.png') }}">
+                                                    <address class="m-t-10 text-center">
+                                                        {{ $transaction->vendor->address }}
+                                                    </address>
+                                                </div>
+                                                <div>
+                                                    <div class="sm-m-t-20">
+                                                        <h2 class="font-montserrat all-caps text-center font-weight-bold">
+                                                            {{ $transaction->total }}
+                                                        </h2>
                                                         <address class="m-t-10 text-center">
-                                                            {{ $transaction->vendor->address }}
+                                                            {{ date("j F, Y", strtotime($transaction->transaction_date)) }} <br />
+                                                            {{ date("h:i A", strtotime($transaction->transaction_date)) }} <br>
+                                                            Order # {{ $transaction->order_no }} <br />
+                                                            Transaction # {{ $transaction->transaction_no }}
                                                         </address>
-                                                    </div>
-                                                    <div class="col-md-4"></div>
-                                                    <div class="col-md-4">
-                                                        <div class="sm-m-t-20">
-                                                            <h2 class="font-montserrat all-caps text-center font-weight-bold">
-                                                                {{ $transaction->total }}
-                                                            </h2>
-                                                            <address class="m-t-10 text-center">
-                                                                <!-- November 11, 2019 <br> -->
-                                                                {{ date("j F, Y", strtotime($transaction->transaction_date)) }} <br />
-                                                                {{ date("h:i A", strtotime($transaction->transaction_date)) }} <br>
-                                                                Order # {{ $transaction->order_no }} <br />
-                                                                Transaction # {{ $transaction->transaction_no }}
-                                                            </address>
-                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -94,26 +94,30 @@
                                                                                 </div>
                                                                             @endif
                                                                         @endforeach
-
                                                                     </div>
                                                                 </div>
-
                                                             </td>
                                                         </tr>
                                                         @endif
-                                                        <tr>
+                                                        <!-- <tr>
                                                             <td class="v-align-middle text-center"
                                                                 style="padding: 1px!important; border-bottom: none;">
-                                                                <div class="b-a b-grey p-t-10 p-b-40 p-l-5 p-r-5">
-                                                                    <h5 class="m-b-30 font-weight-bold">PAYMENT INFORMATION
-                                                                    </h5>
-
-                                                                    <address
-                                                                        class="m-t-10 text-right justify-content-center p-r-50">
-                                                                        <strong>METHOD:</strong> {{ $transaction->payment_method }}
-                                                                        <br>
-                                                                        <strong>REFERENCE:</strong> {{ $transaction->payment_ref }}
-                                                                    </address>
+                                                                <div class="b-grey p-t-10 p-b-40 p-l-5 p-r-5">
+                                                                    <h5 class="m-b-30 font-weight-bold">PAYMENT INFORMATION</h5>
+                                                                    <div class="d-flex justify-content-between px-4" style="max-width: 32rem; overflow-x: auto">
+                                                                        <div style="width: 50%">
+                                                                            <h5><strong>Payment Details</strong></h5>
+                                                                            <ul class="list-group">
+                                                                                <li class="list-group-item text-left">Method: {{ $transaction->payment_method }}</li>
+                                                                                <li class="list-group-item text-left">Auth Code: -</li>
+                                                                                <li class="list-group-item text-left">Payment Reference: {{ $transaction->payment_ref }}</li>
+                                                                            </ul>
+                                                                        </div>
+                                                                        <div style="flex: 1; padding: 0 1rem;">
+                                                                            <h5 class="text-center"><strong>General Notes</strong></h5>
+                                                                            <p class="text-left">-</p>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
 
                                                             </td>
@@ -143,15 +147,64 @@
                                                                     <h1 class="no-margin text-white">{{ $transaction->total }}</h1>
                                                                 </div>
                                                             </td>
-                                                        </tr>
+                                                        </tr> -->
                                                     </tbody>
                                                 </table>
+                                                <div class="d-flex align-items-center flex-column flex-xl-row">
+                                                    <div class="col-lg-8">
+                                                        <div class="v-align-middle text-center" style="padding: 1px!important; border-bottom: none;">
+                                                            <div class="b-grey p-t-10 p-b-40 p-l-5 p-r-5">
+                                                                <h5 class="m-b-30 font-weight-bold">PAYMENT INFORMATION</h5>
+                                                                <div class="d-flex justify-content-between px-4">
+                                                                    <div>
+                                                                        <h5><strong>Payment Details</strong></h5>
+                                                                        <ul class="list-group">
+                                                                            <li class="list-group-item text-left">Method: {{ $transaction->payment_method }}</li>
+                                                                            <li class="list-group-item text-left">Auth Code: -</li>
+                                                                            <li class="list-group-item text-left">Payment Reference: {{ $transaction->payment_ref }}</li>
+                                                                        </ul>
+                                                                    </div>
+                                                                    <div style="flex: 1; padding: 0 1rem;">
+                                                                        <h5 class="text-center"><strong>General Notes</strong></h5>
+                                                                        <p class="text-left">-</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <div style="border-bottom: none;">
+                                                            <div class="text-right justify-content-center align-items-end">
+                                                                <strong>SUBTOTAL:</strong> {{ $transaction->sub_total }}<br>
+                                                                @if($extra_info && $extra_info->where('type', 'amount')->count())
+                                                                    @foreach($extra_info as $info)
+                                                                        @if($info['type'] == 'amount')
+                                                                            <strong>{{ $info['label'] }}:</strong>
+                                                                            {{ $info['value'] }} <br>
+                                                                        @endif
+                                                                    @endforeach
+                                                                @endif
+                                                                @if($transaction->vendor->name != 'Apple')
+                                                                    <strong>TAXES:</strong>
+                                                                    {{ $transaction->tax_amount }}
+                                                                @endif
+                                                            </div>
+                                                            <div
+                                                                class="text-right bg-master-darker col-sm-height padding-10 d-flex flex-column justify-content-center align-items-end">
+                                                                <h5
+                                                                    class="font-montserrat all-caps small no-margin hint-text text-white bold">
+                                                                    Total</h5>
+                                                                <h1 class="no-margin text-white">{{ $transaction->total }}</h1>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <br>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-5">
+                                <div class="col-lg-5">
                                     <div class="card card-default">
                                         <div class="card-header separator">
                                             <div class="card-title">
@@ -267,7 +320,6 @@
                 },
                 "order": [[ 0, "asc" ]],
                 "columns": [
-                    // {data: 'DT_RowIndex', name: 'DT_RowIndex'},
                     {data: 'id', name: 'id'},
                     {data: 'transaction_date', name: 'transaction_date'},
                     {data: 'order_no', name: 'order_no'},
