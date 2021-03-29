@@ -28,8 +28,8 @@
                                     <h5><strong style="#626262 !important">Transaction Details</strong></h5>
                                 </div>
                                 <div>
-                                    <h5 style="color: #626262 !important">ID # {{ $transaction->transaction_no }}</h5>
-                                    @if($transaction->payment_ref)<h5 style="#626262 !important">Ref # {{ $transaction->payment_ref }}</h5>@endif
+                                    <div style="color: #626262 !important; font-size: 1.1rem !important; font-family: Roboto">ID # {{ $transaction->transaction_no }}</div>
+                                    @if($transaction->payment_ref)<div style="#626262 !important; font-size: 1.1rem !important; font-family: Roboto">Ref # {{ $transaction->payment_ref }}</div>@endif
                                 </div>
                             </div>
                         </div>
