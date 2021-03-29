@@ -3,7 +3,17 @@
 @section('title', 'Transaction Details')
 
 @section('page-css')
-
+    <style>
+        @media only screen and (max-width: 1200px){ 
+            .extra {
+                margin-top: .7rem;
+                padding: 0 1.5rem;
+            }
+            .transaction-logo {
+                margin-top: 5%;
+            }
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -18,8 +28,8 @@
                                     <h5><strong style="#626262 !important">Transaction Details</strong></h5>
                                 </div>
                                 <div>
-                                    <h5 style="#626262 !important">Transaction Number: {{ $transaction->transaction_no }}</h5>
-                                    @if($transaction->payment_ref)<h5 style="#626262 !important">Payment Ref: {{ $transaction->payment_ref }}</h5>@endif
+                                    <h5 style="color: #626262 !important">ID # {{ $transaction->transaction_no }}</h5>
+                                    @if($transaction->payment_ref)<h5 style="#626262 !important">Ref # {{ $transaction->payment_ref }}</h5>@endif
                                 </div>
                             </div>
                         </div>
@@ -28,10 +38,10 @@
                             <div class="row">
                                 <div class="col-lg-7">
                                     <div class="card card-default">
-                                        <div class="invoice padding-50">
+                                        <div class="invoice">
                                             <div class="d-flex align-items-center justify-content-between flex-column flex-xl-row">
                                                 <div>
-                                                    <img style="width: 45%; position: relative; left: 50%; transform: translateX(-50%)"  alt="Logo"
+                                                    <img class="transaction-logo" style="width: 45%; position: relative; left: 50%; transform: translateX(-50%)"  alt="Logo"
                                                         data-src-retina="{{ asset('admin/assets/img/vendor-logos/'. $transaction->vendor->logo .'.png') }}"
                                                         data-src="{{ asset('admin/assets/img/vendor-logos/'. $transaction->vendor->logo .'.png') }}"
                                                         src="{{ asset('admin/assets/img/vendor-logos/'. $transaction->vendor->logo .'.png') }}">
@@ -54,13 +64,13 @@
                                                 </div>
                                             </div>
                                             <hr>
-                                            <div class="table-responsive table-invoice">
+                                            <div class="table-responsive">
                                                 <table class="table m-t-10">
                                                     <thead>
                                                         <tr>
-                                                            <th class="text-left">ITEM</th>
-                                                            <th class="text-center">QTY</th>
-                                                            <th class="text-right">AMOUNT</th>
+                                                            <th class="text-left" style="color: #626262 !important; font-weight: bold;">ITEM</th>
+                                                            <th class="text-center" style="color: #626262 !important; font-weight: bold;">QTY</th>
+                                                            <th class="text-right" style="color: #626262 !important; font-weight: bold;">AMOUNT</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -102,8 +112,8 @@
                                                     </tbody>
                                                 </table>
                                                 <div class="d-flex align-items-center flex-column flex-xl-row">
-                                                    <div class="col-lg-8 col-md-12">
-                                                        <div style="padding: 1px!important; border-bottom: none;">
+                                                    <div class="col-xl-8 col-lg-12">
+                                                        <div style="padding: 1px !important; border-bottom: none;">
                                                             <div class="b-grey">
                                                                 <h5 class="m-b-30 font-weight-bold">PAYMENT INFORMATION</h5>
                                                                 <div class="px-4">
@@ -123,8 +133,8 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-lg-4 col-md-12">
-                                                        <div style="border-bottom: none;">
+                                                    <div class="col-xl-4 col-lg-12">
+                                                        <div style="border-bottom: none;" class="extra">
                                                             <div class="text-right justify-content-center align-items-end">
                                                                 <strong>SUBTOTAL:</strong> {{ $transaction->sub_total }}<br>
                                                                 @if($extra_info && $extra_info->where('type', 'amount')->count())
