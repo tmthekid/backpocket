@@ -39,7 +39,7 @@
                                 <div class="col-lg-7">
                                     <div class="card card-default">
                                         <div class="invoice">
-                                            <div class="d-flex align-items-center justify-content-between flex-column flex-xl-row">
+                                            <div class="d-flex align-items-center justify-content-around flex-column flex-xl-row">
                                                 <div>
                                                     <img class="transaction-logo" style="width: 45%; position: relative; left: 50%; transform: translateX(-50%)"  alt="Logo"
                                                         data-src-retina="{{ asset('admin/assets/img/vendor-logos/'. $transaction->vendor->logo .'.png') }}"
@@ -90,8 +90,8 @@
                                                         @if($extra_info && $extra_info->where('type', 'desc')->count())
                                                         <tr>
                                                             <td class="v-align-middle text-center" colspan="3"
-                                                                style="padding: 1px!important; border-bottom: none;">
-                                                                <div class="b-a b-grey p-t-10 p-b-40 p-l-5 p-r-5">
+                                                                style="border-bottom: none;">
+                                                                <div class="b-grey p-t-10 p-b-40 p-l-5 p-r-5">
                                                                     <h5 class="m-b-20 font-weight-bold">EXTRA INFORMATION</h5>
                                                                     <div class="row">
                                                                         @foreach($extra_info as $info)
