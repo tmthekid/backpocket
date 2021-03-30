@@ -1,25 +1,10 @@
 @extends('admin.layouts.master')
-
 @section('title', 'Transaction Details')
-
 @section('page-css')
-    <style>
-        @media only screen and (max-width: 1200px){ 
-            .extra {
-                margin-top: .7rem;
-                padding: 0 1.5rem;
-            }
-            .transaction-logo {
-                margin-top: 5%;
-            }
-        }
-    </style>
 @endsection
-
 @section('content')
-
      <!-- START CONTAINER FLUID -->
-                <div class=" container-fluid">
+                <div class="container-fluid transaction-page">
                     <!-- START card -->
                     <div class="card card-default">
                         <div class="card-header separator">
@@ -67,10 +52,10 @@
                                             <div class="table-responsive">
                                                 <table class="table m-t-10">
                                                     <thead>
-                                                        <tr>
-                                                            <th class="text-left" style="color: #626262 !important; font-weight: bold;">ITEM</th>
-                                                            <th class="text-center" style="color: #626262 !important; font-weight: bold;">QTY</th>
-                                                            <th class="text-right" style="color: #626262 !important; font-weight: bold;">AMOUNT</th>
+                                                        <tr style="background: #626262;">
+                                                            <th class="text-left" style="color: #fff !important; font-weight: bold;">ITEM</th>
+                                                            <th class="text-center" style="color: #fff !important; font-weight: bold;">QTY</th>
+                                                            <th class="text-right" style="color: #fff !important; font-weight: bold;">AMOUNT</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -211,8 +196,7 @@
 
                                                 <p class="small m-t-10">
                                                     <a href="manage-envelopes.html"><span>Go To Envelopes Manager</span>
-                                                        <i
-                                                            class="fa fs-12 fa-arrow-circle-o-right text-success m-l-10"></i></a>
+                                                        <i class="fa fs-12 fa-arrow-circle-o-right text-success m-l-10"></i></a>
                                                 </p>
                                             </form>
                                             <br>
@@ -250,6 +234,8 @@
                         </div>
                     </div>
                     <!-- </div> -->
+                </div>
+                    @include('admin.transactions.print')
                 </div>
 
 @endsection

@@ -37,6 +37,6 @@ class TransactionsController extends Controller
         $extra_info = collect(json_decode($transaction->extra_info, true));
 //        return view('admin.transactions.minvoice', compact('transaction', 'extra_info'));
         $pdf = MPDF::loadView('admin.transactions.minvoice', compact('transaction', 'extra_info'), [], $config);
-        return $pdf->download(strtolower($transaction->vendor->name) . '_invoice.pdf');
+        return $pdf->download('BackpocketReceipt_'.strtolower($transaction->vendor->name).'_'.$transaction->transaction_no);
     }
 }

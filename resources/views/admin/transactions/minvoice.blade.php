@@ -10,7 +10,7 @@
                      <img height="60" alt="" class="invoice-logo"
                           data-src-retina="{{ asset('admin/assets/img/vendor-logos/'. $transaction->vendor->logo .'.png') }}"
                           data-src="{{ asset('admin/assets/img/vendor-logos/'. $transaction->vendor->logo .'.png') }}"
-                          src="{{ asset('admin/assets/img/vendor-logos/'. $transaction->vendor->logo .'.png') }}">
+                          src="{{ public_path('admin\assets\img\dashboard_tile-support.jpg') }}">
                      <address class="m-t-10"  style="width: 340px;">
                          {{ $transaction->vendor->address }}
                      </address>
