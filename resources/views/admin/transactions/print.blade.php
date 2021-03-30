@@ -19,16 +19,24 @@
             display: block;
         }
         .address {
-            font-size: 1rem !important;
+            margin-top: 25px;
+            font-size: 1.3rem !important;
         }
         .total-top {
-            font-size: 2.5rem !important;
+            margin-top: 50px;
+            font-size: 3rem !important;
         }
         .transaction-info p {
-            font-size: 1rem !important;
+            font-size: 1.3rem !important;
         }
         .transaction-table {
             margin-top: 1.5rem;
+        }
+        .transaction-table th {
+            font-size: 1.1rem !important;
+        }
+        .transaction-table td {
+            font-size: 1.1rem !important;
         }
     }
     @media only screen and (max-width: 1200px){ 
@@ -45,7 +53,7 @@
     <div class="transaction-print container">
         <div class="row">
             <div class="col-md-4">
-                <img width="10%" src="{{ asset('admin/assets/img/vendor-logos/'. $transaction->vendor->logo .'.png') }}" alt="Logo">
+                <img width="20%" src="{{ asset('admin/assets/img/vendor-logos/'. $transaction->vendor->logo .'.jpg') }}" alt="Logo">
                 <p class="address">{{ $transaction->vendor->address }}</p>
             </div>
         </div>
@@ -62,6 +70,7 @@
                 <p><strong>Transaction #</strong>&nbsp;{{ $transaction->transaction_no }}</p>
             </div>
         </div>
+        <hr class="my-5" />
         <table class="table">
             <thead>
                 <tr>
@@ -93,20 +102,19 @@
                 @endforeach
                 <tr>
                     <td style="border-left: 1px solid rgba(230, 230, 230, 0.7); border-right: 1px solid rgba(230, 230, 230, 0.7);">
-                        <div>
-                            <h5 class="text-uppercase font-weight-bold">Payment Information</h5>
-                            <p class="text-uppercase font-weight-bold">Method:</p>
-                            <p class="text-uppercase font-weight-bold">Reference:</p>
-                        </div>
+                        <h5 class="text-uppercase font-weight-bold" style="font-size: 1.3rem;">Payment Information</h5>
+                        <p class="text-uppercase mt-4" style="font-size: 1.1rem;"><span class="font-weight-bold">Method: </span>{{ $transaction->payment_method }}</p>
+                        <p class="text-uppercase" style="font-size: 1.1rem;"><span class="font-weight-bold">Reference: </span>{{ $transaction->payment_ref }}</p>
                     </td>
                     <td colspan="2" style="border-right: 1px solid rgba(230, 230, 230, 0.7);">
                         <div>
                             <h5 class="text-uppercase text-right"><strong>Subtotal</strong>: {{ $transaction->sub_total }}</h5>
                             @foreach($extra_info as $info)
-                                @if($info['type'] == 'amount')
-                                    <h5 class="text-uppercase text-right"><strong>{{ $info['label'] }}</strong>: {{ $info['value'] }}</h5>
-                                @endif
+                                <h5 class="text-uppercase text-right"><strong>{{ $info['label'] }}</strong>: {{ $info['value'] }}</h5>
                             @endforeach
+                            @if($transaction->tax_amount)
+                                <h5 class="text-uppercase text-right"><strong>Taxes</strong>: {{ $transaction->tax_amount  }}</h5>
+                            @endif
                             <hr>
                             <h5 class="text-right"><strong>Total: {{ $transaction->total }}</strong></h5>
                         </div>

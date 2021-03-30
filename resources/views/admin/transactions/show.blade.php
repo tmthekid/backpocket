@@ -27,9 +27,9 @@
                                             <div class="d-flex align-items-center justify-content-around flex-column flex-xl-row">
                                                 <div>
                                                     <img class="transaction-logo" style="width: 45%; position: relative; left: 50%; transform: translateX(-50%)"  alt="Logo"
-                                                        data-src-retina="{{ asset('admin/assets/img/vendor-logos/'. $transaction->vendor->logo .'.png') }}"
-                                                        data-src="{{ asset('admin/assets/img/vendor-logos/'. $transaction->vendor->logo .'.png') }}"
-                                                        src="{{ asset('admin/assets/img/vendor-logos/'. $transaction->vendor->logo .'.png') }}">
+                                                        data-src-retina="{{ asset('admin/assets/img/vendor-logos/'. $transaction->vendor->logo .'.jpg') }}"
+                                                        data-src="{{ asset('admin/assets/img/vendor-logos/'. $transaction->vendor->logo .'.jpg') }}"
+                                                        src="{{ asset('admin/assets/img/vendor-logos/'. $transaction->vendor->logo .'.jpg') }}">
                                                     <address class="m-t-10 text-center">
                                                         {{ $transaction->vendor->address }}
                                                     </address>

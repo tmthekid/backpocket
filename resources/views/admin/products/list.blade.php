@@ -16,21 +16,20 @@
         <div class="card card-default">
             <div class="card-header separator">
                 <div class="card-title">
-                    <h5><strong>Products list</strong></h5>
+                    <h5><strong>Products</strong></h5>
                 </div>
             </div>
             <div class="card-body p-t-20">
                 <div class="row justify-content-left">
-                    <div class="col-md-12">
+                    <div class="col-md-4">
                         <div class="form-group" style="display: inline-block">
-
                             <div class="row">
                                 <div class="col-md-3">
                                     <label>Vendor</label>
                                 </div>
                                 <div class="col-md-7">
                                     <select id="vendor_filter" class="form-control">
-                                        <option value="">Select vendir</option>
+                                        <option value="">Select Vendor</option>
                                         @foreach($vendors as $vendor)
                                         <option value="{{ $vendor->id }}">{{ $vendor->name }}</option>
                                         @endforeach
@@ -39,8 +38,47 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-4 form-inline">
+                        <div class="form-group">
+                            <label class="control-label mr-4">Product Name</label>
+                            <input class="form-control" type="text" id="product_name">
+                        </div>
+                    </div>
                 </div>
-
+                <div class="row mb-3">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="from" class="control-label">From</label>
+                            <input type="date" id="from" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="to" class="control-label">To</label>
+                            <input type="date" id="to" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="year_to_date" class="control-label">Year to date</label>
+                            <input type="date" id="year_to_date" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="date_options" class="control-label">Date Options</label>
+                            <select name="date_options" id="date_options" class="form-control">
+                                <option value="">Pick an option</option>
+                                <option value="yesterday">Yesterday</option>
+                                <option value="today">Today</option>
+                                <option value="this_weekdays">This Weekdays</option>
+                                <option value="this_whole_week">This Whole Week</option>
+                                <option value="this_month">This Month</option>
+                                <option value="this_year">This Year</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
                 {{--<hr>--}}
                 <div class="">
                     <table class="table table-hover table-condensed table-responsive-block table-responsive"
@@ -55,6 +93,7 @@
                             <th style="width: 10%;">Product Name</th>
                             <th style="width:10%;">SKU</th>
                             <th style="width: 10%;">Price</th>
+                            <th style="width: 10%;">Created</th>
                             {{--<th style="width: 20%;">Actions</th>--}}
                         </tr>
                         </thead>
@@ -79,7 +118,7 @@
         $(document).ready(function (e) {
             var table = $('#tableProducts');
             $.fn.dataTable.ext.errMode = 'none';
-            var trans_datatable = table.DataTable({
+            var product_datatable = table.DataTable({
                 "processing": true,
                 "serverSide": true,
                 "sDom": "<t><'row'<p i>>",
@@ -96,24 +135,65 @@
                     "type": "POST",
                     'data': function(data){
                         data.vendor_id = $('#vendor_filter').val();
+                        data.product_name = $('#product_name').val();
+                        data.from = $('#from').val();
+                        data.to = $('#to').val();
+                        data.date_option = $('#date_options').val();
+                        data.year_to_date = $('#year_to_date').val();
                     }
                 },
                 "order": [[ 0, "asc" ]],
                 "columns": [
                     // {data: 'DT_RowIndex', name: 'DT_RowIndex'},
                     {data: 'id', name: 'id'},
-                    {data: 'vendor', name: 'vendor'},
+                    {data: 'vendor', name: 'vendor', fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+                        $(nTd).html("<a style='color: #0090d9' href='/admin/vendors/"+oData.vendor_id+"'>"+oData.vendor+"</a>");
+                    }},
                     {data: 'name', name: 'name'},
                     {data: 'sku', name: 'sku'},
                     {data: 'price', name: 'price'},
+                    {data: 'created', name: 'created'},
                     // {data: 'actions', name: 'actions', orderable: false, searchable: false},
                 ]
             });
 
             $("#vendor_filter").select2();
 
+            $('#product_name').keyup( function() {
+                product_datatable.draw();
+            });
+
             $(document).on('change', '#vendor_filter', function () {
-                trans_datatable.draw();
+                product_datatable.draw();
+            });
+
+            $('#from').change( function() {
+                product_datatable.draw();
+            });
+            $('#to').change( function() {
+                product_datatable.draw();
+            });
+            $('#date_options').change( function() {
+                product_datatable.draw();
+            });
+            $('#year_to_date').change( function() {
+                product_datatable.draw();
+            });
+
+            $('#tableProducts thead tr').clone(true).appendTo('#tableProducts thead');
+            $('#tableProducts thead tr:eq(1) th').each( function (i) {
+                $(this).removeClass('sorting');
+                var title = $(this).text();
+                $(this).html('<input type="text" class="form-control" placeholder="Search '+title+'" />');
+                $('input', this).on('keyup change click', function(e) {
+                    e.stopPropagation();
+                    if (product_datatable.column(i).search() !== this.value) {
+                        product_datatable
+                            .column(i)
+                            .search(this.value)
+                            .draw();
+                    }
+                });
             });
 
             // var _format = function (d) {

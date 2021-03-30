@@ -8,9 +8,7 @@
              <div class="row">
                  <div class="col-md-4" style="float: left;">
                      <img height="60" alt="" class="invoice-logo"
-                          data-src-retina="{{ asset('admin/assets/img/vendor-logos/'. $transaction->vendor->logo .'.png') }}"
-                          data-src="{{ asset('admin/assets/img/vendor-logos/'. $transaction->vendor->logo .'.png') }}"
-                          src="{{ public_path('admin\assets\img\dashboard_tile-support.jpg') }}">
+                          src="{{ asset('admin/assets/img/vendor-logos/'. $transaction->vendor->logo .'.jpg') }}">
                      <address class="m-t-10"  style="width: 340px;">
                          {{ $transaction->vendor->address }}
                      </address>

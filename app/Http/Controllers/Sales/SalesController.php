@@ -19,7 +19,7 @@ class SalesController extends Controller
     public function topSales()
     {
         return Purchase::with(['product' => function($query){
-            $query->select('id', 'name');
+            $query->select('id', 'name', 'created_at');
         }, 'transaction' => function($query){
             $query->select('id', 'transaction_no');
         }])->limit(request()->get('length'))->orderBy('price', 'desc')->get();

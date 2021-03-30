@@ -18,7 +18,7 @@
                 <div class="col-md-4">
                     <div class="card card-default" style="min-height: 18rem">
                         <div class="card-body text-center">
-                            <img src="https://via.placeholder.com/450x120.png?text=Vendor+Logo" style="width: 100%" alt="logo">
+                            <img src="http://via.placeholder.com/450x120.png?text=Vendor+Logo" style="width: 100%" alt="logo">
                             <h4>{{ $vendor->street_name }}</h4>
                             <h4>{{ $vendor->city }}</h4>
                             <h4>{{ $vendor->state }}</h4>
@@ -62,7 +62,7 @@
                     </div>
                 </div>
                 <div class="col-md-8">
-                    <img src="https://via.placeholder.com/750x250.png?text=Ad+Image" style="width: 100%" alt="Image">
+                    <img src="http://via.placeholder.com/750x250.png?text=Ad+Image" style="width: 100%" alt="Image">
                 </div>  
             </div>
         </div>

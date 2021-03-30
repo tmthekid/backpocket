@@ -51,6 +51,12 @@
                 <span class="{{ (request()->is('admin/dashboard')) ? 'bg-success' : '' }} icon-thumbnail"><i class="pg-home"></i></span>
             </li>
             <li>
+                <a href="/" class="detailed">
+                    <span class="">Inbox</span>
+                </a>
+                <span class="icon-thumbnail"><i class="fa fa-inbox"></i></span>
+            </li>
+            <li>
                 <a href="{{ route('vendors.list') }}" class="detailed">
                     <span class="titls">Vendors</span>
                 </a>
@@ -68,24 +74,24 @@
                 </a>
                 <span class="{{ (request()->is('admin/transactions*')) ? 'bg-success' : '' }} icon-thumbnail"><i class="pg-charts"></i></span>
             </li>
-            <!-- <li>
-                <a href="manage-categories.html" class="detailed">
-                    <span class="">Manage Categories</span>
-                </a>
-                <span class="icon-thumbnail"><i class="pg-unordered_list"></i></span>
-            </li>
             <li>
-                <a href="manage-users.html" class="detailed">
-                    <span class="">Manage Users</span>
+                <a href="/" class="detailed">
+                    <span class="">Users</span>
                 </a>
                 <span class="icon-thumbnail"><i class="fa fa-users"></i></span>
             </li>
             <li>
-                <a href="manage-envelopes.html" class="detailed">
-                    <span class="">Manage Envelopes</span>
+                <a href="/" class="detailed">
+                    <span class="">Reports</span>
                 </a>
-                <span class="icon-thumbnail"><i class="fa fa-envelope"></i></span>
-            </li> -->
+                <span class="icon-thumbnail"><i class="fa fa-file"></i></span>
+            </li>
+            <li>
+                <a href="/" class="detailed">
+                    <span class="">Settings</span>
+                </a>
+                <span class="icon-thumbnail"><i class="fa fa-wrench"></i></span>
+            </li>
         </ul>
 
         <div class="clearfix"></div>
