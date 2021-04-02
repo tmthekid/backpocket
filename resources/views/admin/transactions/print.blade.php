@@ -2,6 +2,9 @@
     .transaction-print {
         display: none;
     }
+    .invoice-footer {
+        display: none;
+    }
     @media print {
         @page {
             size: A4;
@@ -16,6 +19,7 @@
             display: none;
         }
         .transaction-print {
+            margin-top: -4rem;
             display: block;
         }
         .address {
@@ -37,6 +41,16 @@
         }
         .transaction-table td {
             font-size: 1.1rem !important;
+        }
+        .invoice-footer {
+            position: absolute;
+            left: 0;
+            bottom: 1%; 
+            display: block;
+            width: 100%;
+        }
+        .invoice-footer img {
+            width: 20%;
         }
     }
     @media only screen and (max-width: 1200px){ 
@@ -64,7 +78,7 @@
         </div>
         <div class="row">
             <div class="col-md-4 transaction-info">
-                <p><strong>Date:</strong>&nbsp;{{ date("j F, Y", strtotime($transaction->transaction_date)) }}</p>
+                <p><strong>Date:</strong>&nbsp;{{ date("d/m/Y", strtotime($transaction->transaction_date)) }}</p>
                 <p><strong>Time:</strong>&nbsp;{{ date("h:i A", strtotime($transaction->transaction_date)) }}</p>
                 <p><strong>Order #</strong>&nbsp;{{ $transaction->order_no }}</p>
                 <p><strong>Transaction #</strong>&nbsp;{{ $transaction->transaction_no }}</p>
@@ -122,5 +136,16 @@
                 </tr>
             </tbody>
         </table>
+    </div>
+    <div class="invoice-footer">
+        <div class="d-flex align-items-center justify-content-between"> 
+            <img src="{{ asset('admin/assets/img/footer.jpg') }}" alt="Logo">
+            <div style="font-size: 1.1rem">BackPocket Inc.</div>
+        </div>
+        <hr/>
+        <div class="d-flex align-items-center justify-content-between"> 
+            <div style="font-size: 1.1rem">27 Evans Avenue, Toronto, Ontario, Canada M8Z 1K2</div>
+            <div style="font-size: 1.1rem">info@backpocket.ca</div>
+        </div>
     </div>
 </div>

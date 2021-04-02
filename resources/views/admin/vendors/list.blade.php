@@ -77,7 +77,7 @@
                         <th>Email</th>
                         <th>Address</th>
                         <th>Store No.</th>
-                        <th>Tax No.</th>
+                        <th>HST</th>
                         <th>Date</th>
                     </tr>
                     </thead>
@@ -123,7 +123,7 @@
                     {data: 'email', name: 'email'},
                     {data: 'short_address', name: 'short_address'},
                     {data: 'store_no', name: 'store_no'},
-                    {data: 'tax_no', name: 'tax_no'},
+                    {data: 'hst', name: 'hst'},
                     {data: 'created_at', name: 'created_at'}
                 ]
             });

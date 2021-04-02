@@ -24,6 +24,7 @@
                             <h4>{{ $vendor->state }}</h4>
                             <h4>{{ $vendor->zip_code }}</h4>
                             <p><a href="mailto:{{ $vendor->email }}">{{ $vendor->email }}</a></p>
+                            <h4>{{ $vendor->hst }}</h4>
                             @if($vendor->store_no)
                                 <p>{{ $vendor->store_no }}</p>
                             @endif

@@ -40,7 +40,7 @@
                                                             {{ $transaction->total }}
                                                         </h2>
                                                         <address class="m-t-10 text-center">
-                                                            {{ date("j F, Y", strtotime($transaction->transaction_date)) }} <br />
+                                                            {{ date("d/m/Y", strtotime($transaction->transaction_date)) }} <br />
                                                             {{ date("h:i A", strtotime($transaction->transaction_date)) }} <br>
                                                             Order # {{ $transaction->order_no }} <br />
                                                             Transaction # {{ $transaction->transaction_no }}
