@@ -13,7 +13,7 @@
                                     <h5><strong style="#626262 !important">Transaction Details</strong></h5>
                                 </div>
                                 <div>
-                                    <div style="color: #626262 !important; font-size: 1.1rem !important; font-family: Roboto">ID # {{ $transaction->transaction_no }}</div>
+                                    <div style="color: #626262 !important; font-size: 1.1rem !important; font-family: Roboto">Transaction # {{ $transaction->transaction_no }}</div>
                                     @if($transaction->payment_ref)<div style="#626262 !important; font-size: 1.1rem !important; font-family: Roboto">Ref # {{ $transaction->payment_ref }}</div>@endif
                                 </div>
                             </div>
@@ -42,8 +42,7 @@
                                                         <address class="m-t-10 text-center">
                                                             {{ date("d/m/Y", strtotime($transaction->transaction_date)) }} <br />
                                                             {{ date("h:i A", strtotime($transaction->transaction_date)) }} <br>
-                                                            Order # {{ $transaction->order_no }} <br />
-                                                            Transaction # {{ $transaction->transaction_no }}
+                                                            Order # {{ $transaction->order_no }}
                                                         </address>
                                                     </div>
                                                 </div>
@@ -104,9 +103,29 @@
                                                                 <div class="px-4">
                                                                     <h5 class="text-left"><strong>Payment Details</strong></h5>
                                                                     <ul class="list-group">
-                                                                        <li class="list-group-item text-left">Method: {{ $transaction->payment_method }}</li>
-                                                                        <li class="list-group-item text-left">Auth Code: -</li>
-                                                                        <li class="list-group-item text-left">Payment Reference: {{ $transaction->payment_ref }}</li>
+                                                                        <li class="list-group-item text-left font-weight-bold text-uppercase">Method: {{ $transaction->payment_method }}</li>
+                                                                        <li class="list-group-item text-left font-weight-bold text-uppercase">Reference: {{ $transaction->payment_ref }}</li>
+                                                                        <hr>
+                                                                        @if($transaction->auth_id)
+                                                                            <li class="list-group-item text-left font-weight-bold text-uppercase">Auth ID: {{ $transaction->auth_id }}</li>
+                                                                        @endif
+                                                                        <li class="list-group-item text-left font-weight-bold text-uppercase">Trans. Date: {{ date("d/m/Y", strtotime($transaction->transaction_date)) }}</li>
+                                                                        <li class="list-group-item text-left font-weight-bold text-uppercase">Trans. Time: {{ date("h:i A", strtotime($transaction->transaction_date)) }}</li>
+                                                                        @if($transaction->operator_id)
+                                                                            <li class="list-group-item text-left font-weight-bold text-uppercase">Operator ID: {{ $transaction->operator_id }}</li>
+                                                                        @endif
+                                                                        @if($transaction->terminal_no)
+                                                                            <li class="list-group-item text-left font-weight-bold text-uppercase">Terminal #: {{ $transaction->terminal_no }}</li>
+                                                                        @endif
+                                                                        @if($transaction->register_no)
+                                                                            <li class="list-group-item text-left font-weight-bold text-uppercase">Register #: {{ $transaction->register_no }}</li>
+                                                                        @endif
+                                                                        @if($transaction->bar_qr_code)
+                                                                            <li class="list-group-item text-left font-weight-bold text-uppercase">Barcode: {{ $transaction->bar_qr_code }}</li>
+                                                                        @endif
+                                                                        @if($transaction->employee_no)
+                                                                            <li class="list-group-item text-left font-weight-bold text-uppercase">Employee Id: {{ $transaction->employee_no }}</li>
+                                                                        @endif
                                                                     </ul>
                                                                 </div>
                                                                 <div class="px-4">

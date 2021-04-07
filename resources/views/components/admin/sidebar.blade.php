@@ -1,4 +1,19 @@
 <!-- BEGIN SIDEBPANEL-->
+<style>
+    .category-dropdown-list {
+        list-style: none;
+        height: 0;
+        opacity: 0; 
+        visibility: hidden;
+        transition: all .3s ease-in;
+        margin-left: 5px;
+    }
+    .category-dropdown-list li {
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        padding: 5px 0;
+    }
+</style>
 <nav class="page-sidebar" data-pages="sidebar">
     <!-- BEGIN SIDEBAR MENU TOP TRAY CONTENT-->
     <!-- <div class="sidebar-overlay-slide from-top" id="appMenu">
@@ -56,6 +71,18 @@
                 </a>
                 <span class="icon-thumbnail"><i class="fa fa-inbox"></i></span>
             </li>
+            <li class="category-dropdown">
+                <a href="#" class="detailed">
+                    <span class="titls">Categories</span>
+                </a>
+                <span class="icon-thumbnail"><i class="fa fa-list-alt"></i></span>
+                <ul class="category-dropdown-list">
+                    <li><a href="#">Housing</a></li>
+                    <li><a href="#">Transportation</a></li>
+                    <li><a href="#">Food</a></li>
+                    <li><a href="#">Utilities</a></li>
+                </ul>
+            </li>
             <li>
                 <a href="{{ route('vendors.list') }}" class="detailed">
                     <span class="titls">Vendors</span>
@@ -100,3 +127,17 @@
 </nav>
 <!-- END SIDEBAR -->
 <!-- END SIDEBPANEL-->
+<script>
+    const dropdown = document.querySelector('.category-dropdown');
+    const dropdownList = document.querySelector('.category-dropdown-list');
+    dropdown.addEventListener('mouseenter', function(){
+        dropdownList.style.height = '100%';
+        dropdownList.style.opacity = '1';
+        dropdownList.style.visibility = 'visible';
+    });
+    dropdown.addEventListener('mouseleave', function(){
+        dropdownList.style.height = '0';
+        dropdownList.style.opacity = '0';
+        dropdownList.style.visibility = 'hidden';
+    });
+</script>
