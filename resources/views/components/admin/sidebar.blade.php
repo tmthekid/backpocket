@@ -77,10 +77,9 @@
                 </a>
                 <span class="icon-thumbnail"><i class="fa fa-list-alt"></i></span>
                 <ul class="category-dropdown-list">
-                    <li><a href="#">Housing</a></li>
-                    <li><a href="#">Transportation</a></li>
-                    <li><a href="#">Food</a></li>
-                    <li><a href="#">Utilities</a></li>
+                <?php foreach(App\Category::get() as $category){ ?>
+                    <li><a href="#">{{ $category->name }}</a></li>
+                <?php } ?>
                 </ul>
             </li>
             <li>
